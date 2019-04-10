@@ -1,0 +1,26 @@
+body {
+    background-color: #3C4C60;
+}
+.login{
+    width: 400px;
+    margin: auto;
+}
+input {
+    width: 100%;
+    border-radius: 7px;
+}
+.center {
+    display: none;
+    width: 500px;
+    margin: auto;
+}
+#notLogged {
+    display: none;
+    font-size: 40px;
+    color: red;
+    text-align: center;
+}
+#error {
+    color: red;
+    font-size: 20px;
+}
