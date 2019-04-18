@@ -1,5 +1,7 @@
 body {
     background-color: #3C4C60;
+    width: 70%;
+    margin: 0 auto;
 }
 .login{
     width: 400px;
@@ -23,4 +25,31 @@ input {
 #error {
     color: red;
     font-size: 20px;
+}
+a {
+    display: inline-block;
+    padding: 14px 16px;
+    color: black;
+    text-decoration: none;
+}
+nav {
+    width: 100%;
+    background-color: #aed1e8;
+    overflow: hidden;
+}
+a:hover{
+    background-color: #8ec2e2;
+}
+.active {
+    color: white;
+    background-color: #3C4C60;
+    border-bottom: solid;
+    border-color: #8ec2e2;
+}
+.active-index {
+    border-left: solid;
+    border-color: #8ec2e2;
+}
+.right {
+    right: 0;
 }

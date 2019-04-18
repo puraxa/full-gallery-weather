@@ -3,25 +3,20 @@
     <head>
         <title>Login</title>
         <meta charset="UTF-8">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="../style/style.css">
         <script src="../script/script.js"></script>
     </head>
     <body onload="isLoggedIn(request, 'GET', setAuthorization, 'https://3d1pftib26.execute-api.eu-west-1.amazonaws.com/dev/user/profile', showProfile)">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="../index.html">Home</a>
-                <a class="navbar-brand" href="profile.html">Profile</a>
-                <a class="navbar-brand" href="gallery.html">Gallery</a>
-                <a class="navbar-brand" href="weather.html">Weather</a>
-                <a class="navbar-brand" href="login.html" id="log">Login</a>
-                <button onclick="logOut()" style="display: none;" id="logout" class="btn btn-outline-secondary my-2 my-sm-0">Log out</button>
-            </nav>
-            <p id="notLogged">Please log in!</p>
+        <nav>
+                <a href="../index.html">Home</a>
+                <a href="./profile.html" class="active">Profile</a>
+                <a href="./gallery.html">Gallery</a>
+                <a href="./weather.html">Weather</a>
+                <a href="./login.html">Login</a>
+            </nav>            <p id="notLogged">Please log in!</p>
             <div id="profile" class="row">
 
             </div>
             <p id="error"></p>
         </div>
-    </body>
 </html>
