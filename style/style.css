@@ -110,3 +110,6 @@ p {
 .float-left{
     float:left;
 }
+img {
+    color:red;
+}
