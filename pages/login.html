@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="../style/style.css">
-        <script src="../script/script.js"></script>
-    </head>
-    <body onload="isLoggedIn(redirectHomePage)">
-                <nav>
-                        <a href="../index.html">Home</a>
-                        <a href="./profile.html">Profile</a>
-                        <a href="./gallery.html">Gallery</a>
-                        <a href="./weather.html">Weather</a>
-                        <a href="./login.html" class="active">Login</a>
-                    </nav>
-            <p id="notLogged"></p>
-            <div class="login">
-                <img src="../images/login.png" alt="login" width="400" height="250">
-                <label for="email">Email</label><br>
-                <input type="text" name="email" placeholder="Email"><br>
-                <label for="password">Password</label><br>
-                <input type="password" name="password" placeholder="Password"><br><br>
-                <button type="button" class="btn btn-outline-secondary" onclick="request('POST', login,'https://3d1pftib26.execute-api.eu-west-1.amazonaws.com/dev/user/login',loginParse)">Login</button>
-                <p id="error"></p>
-            </div>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../script/script.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="./profile.html">Profile</a>
+        <a href="./gallery.html">Gallery</a>
+        <a href="./weather.html">Weather</a>
+        <a href="./login.html" id="log" class="active active-login">Login</a>
+        <a href="#" onclick="logOut()" style="display:none;float:right;" id="logout">Log out</a>
+    </nav>
+    <p id="notLogged"></p>
+    <div class="login">
+        <img src="../images/login.png" alt="login picture" width="100%">
+        <input type="text" name="email" placeholder="email">
+        <input type="password" name="password" placeholder="password">
+        <button onclick="request('POST', loginUrl, login, loginParams())">Log in</button>
+        <p id="error"></p>
+    </div>
+</body>
 </html>

@@ -1,78 +1,83 @@
-let geoLocationKey = '0179e876a4524198b2324e82123672f0';
+let loginUrl = 'https://3d1pftib26.execute-api.eu-west-1.amazonaws.com/dev/user/login';
+let getUserInfoUrl = 'https://cors-anywhere.herokuapp.com/https://3d1pftib26.execute-api.eu-west-1.amazonaws.com/dev/user/profile';
+let galleryUrl = 'https://3d1pftib26.execute-api.eu-west-1.amazonaws.com/dev/images/list';
 
-function isLoggedIn(fn, method, callback, url, callbackParse, urlEdit){
-    let log = localStorage.getItem('token');
-    if(!log){
+function isLoggedIn(callback, method, url, reqCallback, params,reqHeader){
+    let foundToken = localStorage.getItem('token');
+    if(!foundToken){
         document.getElementById('notLogged').style.display = 'block';
     }
-    else {
+    else{
         document.getElementById('log').style.display = 'none';
-        document.getElementById('logout').style.display = 'inline-block';
-        if(fn){
-            fn(method, callback, url, callbackParse, urlEdit);
+        document.getElementById('logout').style.display = 'block';
+        callback(method, url, reqCallback, params, reqHeader);
+        if(document.getElementById('input-button')){
+            document.getElementById('input-button').style.display = 'block';
         }
     }
 }
 
-function request(method, callback, url, callbackParse, urlEdit){
-    let xhttp = new XMLHttpRequest();
-    if(urlEdit){
-        url = urlEdit(url);
-        console.log(url);
+function request(method, url, callback, params, reqHeader){
+    let client = new XMLHttpRequest();
+    client.open(method, url, true);
+    if(reqHeader){
+        client.setRequestHeader(reqHeader[0],reqHeader[1]);
     }
-    xhttp.open(method, url, true);
-    callback(xhttp);
-    xhttp.onreadystatechange = function() {
-        if(xhttp.readyState == 4 && xhttp.status == 200){
-            callbackParse(xhttp);
-        }
-        if(xhttp.readyState == 4 && xhttp.status != 200){
-            showError(xhttp);
-        }
+    client.send(params);
+    client.onreadystatechange = callback.bind(client);
+}
+
+function login(){
+    if(this.readyState == 4 && this.status == 200){
+        let token = JSON.parse(this.responseText);
+        localStorage.setItem('token', token.token);
+        location.href = './profile.html';
+    }
+    if(this.readyState == 4 && this.status != 200){
+        document.getElementById('error').innerText = JSON.parse(this.responseText).message;
     }
 }
-function login(httpReq){
-    httpReq.setRequestHeader('Content-type', 'application/json');
-    let loginData = {};
-    loginData.email = document.getElementsByName('email')[0].value;
-    loginData.password = document.getElementsByName('password')[0].value;
-    let sendLoginData = JSON.stringify(loginData);
-    httpReq.send(sendLoginData);
+
+function loginParams(){
+    let obj = {};
+    obj.email = document.getElementsByName('email')[0].value;
+    obj.password = document.getElementsByName('password')[0].value;
+    let data = JSON.stringify(obj);
+    return data;
 }
 
-function loginParse(httpReq){
-    let result = JSON.parse(httpReq.responseText);
-    localStorage.setItem('token', result.token);
-    redirectHomePage();
+function logOut(){
+    localStorage.clear();
+    location.reload();
 }
 
-function geolocationUrl(url){
-    let location = encodeURIComponent(document.getElementsByName('location')[0].value);
-    url = url + '?key=' + geoLocationKey + '&q=' + location;
-    return url;
+function getUserInfo(){
+    if(this.readyState == 4 && this.status == 200){
+        let userInfo = JSON.parse(this.responseText);
+        localStorage.setItem('firstname', userInfo.first_name);
+        localStorage.setItem('lastname', userInfo.last_name);
+        showUserProfile(userInfo);
+    }
 }
 
-function parseGeoLocation(httpResponse){
-    let response = JSON.parse(httpResponse.responseText);
-    localStorage.setItem('lat', response.results[0].geometry.lat);
-    localStorage.setItem('lng', response.results[0].geometry.lng);
-    localStorage.setItem('location', document.getElementsByName('location')[0].value);
-    request('GET', sendGet,'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/a849cd7ee1e185d27d4542113dd2d7ef/', showForecast, weatherUrl);
+function showUserProfile(data){
+    document.getElementById('user-profile').innerHTML = `
+    <div class="user-profile">
+        <img src="../images/profile.png" width=250>
+    </div>
+    <div class="user-profile">
+        <p>First name : ${data.first_name}</p>
+        <p>Last name : ${data.last_name}</p>
+        <p>Email : ${data.email}</p>
+    </div>
+    `;
 }
 
-function weatherUrl(url) {
-    url += `${localStorage.getItem('lat')},${localStorage.getItem('lng')}?units=si&lang=bs&exclude=[minutely,hourly,daily]`;
-    return url;
-}
-
-function setAuthorization(httpReq) {
-    httpReq.setRequestHeader('Authorization', localStorage.getItem('token'));
-    httpReq.send();
-}
-
-function imgParse(httpResponse){
-    let response = JSON.parse(httpResponse.responseText);
-    showGallery(response);
+function galleryReq(){
+    if(this.readyState == 4 && this.status == 200){
+        let galleryData = JSON.parse(this.responseText);
+        showGallery(galleryData);
+    }
 }
 
 function showGallery(data){
@@ -83,13 +88,11 @@ function showGallery(data){
         url = data.base_url + '/' + data.Contents[i].Key;
         imgTitle = upper(data.Contents[i].Key.split('-'));
         gallery += `
-        <div class="card bg-secondary col-xs-6 col-sm-6 col-md-4 col-lg-3">
-            <img class="card-img-top" src="${url}" alt="${imgTitle} image" width="200px" height="200px">
-            <div class="card-body">
-                <h5 class="card-title">${imgTitle}</h5>
+            <div class="picture-box">
+                <img src="${url}" class="img-gallery" alt="${imgTitle}">
+                ${imgTitle}
             </div>
-        </div>
-        `;
+        `
     }
     document.getElementById('gallery').innerHTML = gallery;
 }
@@ -102,65 +105,49 @@ function upper(arr){
     return retText;
 }
 
-function redirectHomePage(){
-    window.location.href = "./profile.html";
-}
-
-function logOut(){
-    localStorage.clear();
-    location.reload();
-}
-
-function sendGet(httpReq){
-    httpReq.send();
-}
-
-function showForecast(response){
-    let weather = JSON.parse(response.responseText);
-    document.getElementById('forecast').innerHTML = `
-    <div class="col-6">
-      <img src="../images/weather/${weather.currently.icon}.png" width="90%" height="auto" alt="${weather.currently.summary}">
-    </div>
-    <div class="col-6">
-      <h1>${weather.currently.summary}</h1>
-      <p>Temperatura: ${Math.round(weather.currently.temperature)}°C</p>
-      <p>Vlaznost zraka: ${weather.currently.humidity*100}%</p>
-      <p>Brzina vjetra: ${(weather.currently.windSpeed*3.6).toFixed(2)}km/h</p>
-    </div>
-      `;
-}
-
-function showWeather() {
-    document.getElementsByClassName('center')[0].style.display = 'block';
-    let lat = localStorage.getItem('lat');
-    let lng = localStorage.getItem  ('lng');
-    if(lat && lng){
-        request('GET', sendGet,'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/a849cd7ee1e185d27d4542113dd2d7ef/', showForecast, weatherUrl);
-        document.getElementsByName('location')[0].value = localStorage.getItem('location');
+function locationInfo(){
+    if(this.readyState == 4 && this.status == 200){
+        let data = JSON.parse(this.responseText);
+        localStorage.setItem('lat', data.results[0].geometry.lat);
+        localStorage.setItem('lng', data.results[0].geometry.lng);
+        localStorage.setItem('location', document.getElementById('location').value);
+        request('GET', prepareWeatherUrl(), weatherInfo);
     }
 }
 
-function showProfile(response) {
-    let information = JSON.parse(response.responseText);
-    document.getElementById('profile').innerHTML = `
-        <div class="col-2">
-            <img src="../images/profile.png" width="100%" height="auto" alt="">
-        </div>
-        <div class="col-6">
-            <p>Ime: ${information.first_name}</p>
-            <p>Prezime: ${information.last_name}</p>
-            <p>Email: ${information.email}</p>  
-        </div>
+function weatherInfo(){
+    if(this.readyState == 4 && this.status == 200){
+        let data = JSON.parse(this.responseText);
+        showWeather(data);
+    }
+}
+
+function prepareLocationUrl(){
+    let location = document.getElementById('location').value;
+    return `https://api.opencagedata.com/geocode/v1/json?key=0179e876a4524198b2324e82123672f0&q=${location}`;
+}
+
+function prepareWeatherUrl(){
+    let lat = localStorage.getItem('lat');
+    let lng = localStorage.getItem('lng');
+    return `https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/a849cd7ee1e185d27d4542113dd2d7ef/${lat},${lng}?units=si&lang=bs&exclude=[minutely,hourly,daily]`;
+}
+
+function showWeather(weather){
+    document.getElementById('location').value = localStorage.getItem('location');
+    document.getElementById('weather').innerHTML = `
+  <div class="float-left">
+    <img src="../images/weather/${weather.currently.icon}.png" width=175 alt="${weather.currently.summary}">
+  </div>
+  <div class="float-left">
+    <p>${weather.currently.summary}</p>
+    <p>Temperatura: ${Math.round(weather.currently.temperature)}°C</p>
+    <p>Vlaznost zraka: ${weather.currently.humidity*100}%</p>
+    <p>Brzina vjetra: ${(weather.currently.windSpeed*3.6).toFixed(2)}km/h</p>
+  </div>
     `;
-    localStorage.setItem('firstName',information.first_name);
-    localStorage.setItem('lastName',information.last_name);
 }
 
-function welcomeMessage(element) {
-    document.getElementsByClassName('container')[0].innerHTML += `<p>Welcome ${localStorage.getItem('firstName')} ${localStorage.getItem('lastName')}</p>`
-}
-
-function showError(response) {
-    let res = JSON.parse(response.responseText);
-    document.getElementById('error').textContent = res.message;
+function welcomeMessage(){
+    document.getElementsByTagName('body')[0].innerHTML += `<p>Welcome ${localStorage.getItem('firstname')} ${localStorage.getItem('lastname')}!</p>`
 }

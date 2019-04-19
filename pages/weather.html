@@ -1,32 +1,28 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Login</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="../style/style.css">
-        <script src="../script/script.js"></script>
-    </head>
-    <body onload="isLoggedIn(showWeather)">
-            <nav>
-                    <a href="../index.html">Home</a>
-                    <a href="./profile.html">Profile</a>
-                    <a href="./gallery.html">Gallery</a>
-                    <a href="./weather.html" class="active">Weather</a>
-                    <a href="./login.html">Login</a>
-                </nav>
-                <p id="notLogged">Please log in!</p>
-                <br>
-                <br>
-                <div class="center">
-                    <div class="input-group mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Unesite grad" name="location">
-                            <div class="input-group-append">
-                            <button type="button" class="btn btn-secondary" onclick="request('GET', sendGet, 'https://api.opencagedata.com/geocode/v1/json', parseGeoLocation, geolocationUrl)">Prikazi prognozu</button>
-                            </div>
-                        </div>
-                </div>
-                <div id="forecast" class="row"></div>
-                <p id="error"></p>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <script src="../script/script.js"></script>
+</head>
+<body onload="isLoggedIn(request, 'GET', prepareWeatherUrl(), weatherInfo)">
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="./profile.html">Profile</a>
+        <a href="./gallery.html">Gallery</a>
+        <a href="./weather.html" class="active">Weather</a>
+        <a href="./login.html" id="log">Login</a>
+        <a href="#" onclick="logOut()" style="display:none;float:right;" id="logout">Log out</a>
+    </nav>
+    <p id="notLogged">Please log in!</p>
+    <div id="input-button">
+        <input type="text" id="location" placeholder="City"><button id="getWeather" onclick="request('GET', prepareLocationUrl(), locationInfo)">Show forecast</button>
+    </div>
+    <div id="weather">
+
+    </div>
+</body>
 </html>
