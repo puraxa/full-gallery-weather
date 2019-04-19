@@ -151,3 +151,23 @@ function showWeather(weather){
 function welcomeMessage(){
     document.getElementsByTagName('body')[0].innerHTML += `<p>Welcome ${localStorage.getItem('firstname')} ${localStorage.getItem('lastname')}!</p>`
 }
+
+function indexCheck(){
+    let client = new XMLHttpRequest();
+    return new Promise((resolve, reject) => {
+        client.open('GET', getUserInfoUrl, true);
+        client.setRequestHeader('Authorization', localStorage.getItem('token'));
+        client.send();
+        client.onreadystatechange = () => {
+            if(client.readyState == 4 && client.status == 200){
+                let obj = JSON.parse(client.responseText);
+                localStorage.setItem('firstname', obj.first_name);
+                localStorage.setItem('lastname', obj.last_name);
+                resolve();
+            }
+            if(client.readyState == 4 && client.status != 200){
+                reject(new Error(client.responseText));
+            }
+        }
+    }).then(welcomeMessage).catch();
+}
