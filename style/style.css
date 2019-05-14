@@ -22,3 +22,19 @@ nav a:hover  {
     border: solid 1px;
     border-color: #8ec2e2;
 }
+.text-all-center {
+    text-align: center;
+}
+.margin-auto {
+    margin: auto;
+}
+input {
+    width: 100%;
+    color: black;
+}
+.border-round {
+    border-radius: 5px;
+}
+.margin-top {
+    margin-top: 5px;
+}
