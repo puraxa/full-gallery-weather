@@ -4,6 +4,8 @@ import * as fetchOptions from './fetchOptions.mjs';
 import * as loginFn from './loginFn.mjs';
 import {isLoggedIn} from './isLoggedIn.mjs';
 import {welcomeMessage} from './welcomeMessage.mjs';
+import {displayProfile} from './profile.mjs';
+import {gallery} from './gallery.mjs';
 
 window.loginUrl = urls.loginUrl;
 window.galleryUrl = urls.galleryUrl;
@@ -14,3 +16,5 @@ window.fetchUser = fetchOptions.user;
 window.loginFn = loginFn.login;
 window.isLoggedIn = isLoggedIn;
 window.welcomeMessage = welcomeMessage;
+window.displayProfile = displayProfile;
+window.gallery = gallery;
