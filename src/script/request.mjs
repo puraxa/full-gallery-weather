@@ -1,5 +1,5 @@
-export const request = (url, options) => {
+export const request = async (url, options) => {
     const response = await fetch(url, options);
-    let data = response.json();
+    let data = await response.json();
     return response.ok ? data : Promise.reject(data);
 }

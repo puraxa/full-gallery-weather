@@ -7,9 +7,9 @@
     <title>APP</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/style.css">
-    <script src="./script/app.js"></script>
+    <script src="../script/app.js" type="module"></script>
 </head>
-<body onload="isLoggedIn(indexCheck)" class="bg-color">
+<body class="bg-color">
     <div class="container">
         <nav class="bg-gray overflow-hidden">
             <a href="../index.html">Home</a>
@@ -23,10 +23,11 @@
             <div class="col-sm-12 col-md-9 col-xl-6 margin-auto">
                 <img src="../images/login.png" alt="login.png" width="100%">
                 <label for="">Email</label>
-                <input type="text" placeholder="Email" class="border-round">
+                <input type="text" placeholder="Email" class="border-round" id="email">
                 <br>
                 <label for="" class="margin-top">Password</label>
-                <input type="password" placeholder="Password" class="border-round">
+                <input type="password" placeholder="Password" class="border-round" id="password">
+                <button onclick="loginFn(request,loginUrl, fetchLogin(), userUrl, fetchUser)">Login</button>
             </div>
         </div>
     </div>
