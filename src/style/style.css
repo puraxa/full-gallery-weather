@@ -38,3 +38,9 @@ input {
 .margin-top {
     margin-top: 5px;
 }
+#location {
+    width: 70%;
+}
+.show-weather {
+    width: calc(30% - 4px);
+}
