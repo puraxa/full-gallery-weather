@@ -21,4 +21,8 @@ const user = () => {
     }
 }
 
-export {login, user};
+const location = {
+    method: 'GET',
+    mode: 'cors'
+}
+export {login, user, location};

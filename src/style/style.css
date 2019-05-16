@@ -44,3 +44,9 @@ input {
 .show-weather {
     width: calc(30% - 4px);
 }
+.padding-none {
+    padding: 0;
+}
+.margin-none {
+    margin: 0;
+}

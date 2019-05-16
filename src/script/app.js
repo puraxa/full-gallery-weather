@@ -6,7 +6,7 @@ import {isLoggedIn} from './isLoggedIn.mjs';
 import {welcomeMessage} from './welcomeMessage.mjs';
 import {displayProfile} from './profile.mjs';
 import {gallery} from './gallery.mjs';
-import {showWeather} from './weather.mjs';
+import {weather, showWeather} from './weather.mjs';
 
 window.loginUrl = urls.loginUrl;
 window.galleryUrl = urls.galleryUrl;
@@ -19,4 +19,6 @@ window.isLoggedIn = isLoggedIn;
 window.welcomeMessage = welcomeMessage;
 window.displayProfile = displayProfile;
 window.gallery = gallery;
+window.weather = weather;
+window.fetchLocation = fetchOptions.location;
 window.showWeather = showWeather;
