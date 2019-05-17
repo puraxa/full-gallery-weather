@@ -1,5 +1,3 @@
-import { handleError } from "./handleError.mjs";
-
 export let login = async (request, url, options, callbackUrl, callbackOptions) => {
     try{
         let response = await request(url, options);

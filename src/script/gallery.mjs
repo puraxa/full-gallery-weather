@@ -1,5 +1,3 @@
-import { userOptions } from "./fetchOptions.mjs";
-
 export const gallery = async () => {
     try {
     const response = await request(galleryUrl,userOptions());

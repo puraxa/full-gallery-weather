@@ -1,5 +1,3 @@
-import { locationOptions } from "./fetchOptions.mjs";
-
 export const weather = () => {
     let html = ``;
     html = `
