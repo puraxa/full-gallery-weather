@@ -1,0 +1,16 @@
+{
+    "app": [
+        "./src/script/app.js",
+        "./src/script/fetchOptions.mjs",
+        "./src/script/gallery.mjs",
+        "./src/script/handleError.mjs",
+        "./src/script/isLoggedIn.mjs",
+        "./src/script/loginFn.mjs",
+        "./src/script/logout.mjs",
+        "./src/script/profile.mjs",
+        "./src/script/request.mjs",
+        "./src/script/urls.mjs",
+        "./src/script/weather.mjs",
+        "./src/script/welcomeMessage.mjs"
+    ]
+}
