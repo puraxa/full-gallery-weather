@@ -1,0 +1,59 @@
+body {
+    color: white;
+}
+nav a {
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+nav a:hover  {
+    background-color: #8ec2e2;
+    text-decoration: none;
+}
+.bg-gray {
+    background-color: #aed1e8;;
+}
+.overflow-hidden {
+    overflow: hidden;
+}
+.bg-color {
+    background-color: #3C4C60;
+}
+.active {
+    background-color: #8ec2e2;
+    border: solid 1px;
+    border-color: #8ec2e2;
+}
+.text-all-center {
+    text-align: center;
+}
+.margin-auto {
+    margin: auto;
+}
+input {
+    width: 100%;
+    color: black;
+}
+.border-round {
+    border-radius: 5px;
+}
+.margin-top {
+    margin-top: 5px;
+}
+#location {
+    width: 70%;
+}
+.show-weather {
+    width: calc(30% - 4px);
+}
+.padding-none {
+    padding: 0;
+}
+.margin-none {
+    margin: 0;
+}
+.error {
+    color: red;
+    font-size: 1.1em;
+}

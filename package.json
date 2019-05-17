@@ -1,0 +1,28 @@
+{
+  "name": "full-gallery-weather",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puraxa/full-gallery-weather.git"
+  },
+  "author": "Edin Purivatra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/puraxa/full-gallery-weather/issues"
+  },
+  "homepage": "https://github.com/puraxa/full-gallery-weather#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-html-minifier2": "^1.1.11",
+    "gulp-module-builder": "^1.0.2",
+    "gulp-replace": "^1.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^1.0.4"
+  }
+}

@@ -1,0 +1,28 @@
+import * as urls from './urls.mjs';
+import {request} from './request.mjs';
+import * as fetchOptions from './fetchOptions.mjs';
+import * as loginFn from './loginFn.mjs';
+import {isLoggedIn} from './isLoggedIn.mjs';
+import {welcomeMessage} from './welcomeMessage.mjs';
+import {displayProfile} from './profile.mjs';
+import {gallery} from './gallery.mjs';
+import {weather, showWeather} from './weather.mjs';
+import {logOut} from './logout.mjs';
+import {handleError} from './handleError.mjs';
+
+window.loginUrl = urls.loginUrl;
+window.galleryUrl = urls.galleryUrl;
+window.getUserInfoUrl = urls.getUserInfoUrl;
+window.request = request;
+window.loginOptions = fetchOptions.loginOptions;
+window.userOptions = fetchOptions.userOptions;
+window.login = loginFn.login;
+window.isLoggedIn = isLoggedIn;
+window.welcomeMessage = welcomeMessage;
+window.displayProfile = displayProfile;
+window.gallery = gallery;
+window.weather = weather;
+window.locationOptions = fetchOptions.locationOptions;
+window.showWeather = showWeather;
+window.logOut = logOut;
+window.handleError = handleError;
