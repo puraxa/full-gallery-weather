@@ -3,7 +3,7 @@ export const displayProfile = () => {
         <div class="row">    
             <div class="col-xs-12 col-md-6">
                 <div class="row">
-                    <img src="../images/profile.png" width="100%" class="col-sm-12 col-md-6">
+                    <img src="../images/profile.png" width="100%" height="auto" class="col-sm-12 col-md-6">
                     <div class="col-sm-12 col-md-6 margin-top">
                         <div>
                             First name: ${localStorage.getItem('first_name')}

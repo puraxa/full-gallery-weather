@@ -10,7 +10,7 @@ export const gallery = async () => {
         imgTitle = upper(response.Contents[i].Key.split('-'));
         html += `
             <div class="col-sm-12 col-md-4 col-xl-3">
-                <img src="${url}" alt="${imgTitle}" width="100%">
+                <img src="${url}" alt="${imgTitle}" width="100%" height="auto" class="error">
                 ${imgTitle}
             </div>
         `;
