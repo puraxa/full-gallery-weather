@@ -1,3 +1,5 @@
+import { locationOptions } from "./fetchOptions.mjs";
+
 export const weather = () => {
     let html = ``;
     html = `
@@ -14,10 +16,10 @@ export const weather = () => {
 
 export const showWeather = async () => {
     try{
-        const location = await request(`https://api.opencagedata.com/geocode/v1/json?key=0179e876a4524198b2324e82123672f0&q=${document.getElementById('location').value}`,fetchLocation);
+        const location = await request(`https://api.opencagedata.com/geocode/v1/json?key=0179e876a4524198b2324e82123672f0&q=${document.getElementById('location').value}`,locationOptions);
         localStorage.setItem('lat', location.results[0].geometry.lat);
         localStorage.setItem('lng', location.results[0].geometry.lng);
-        const weatherInfo = await request(`https://api.darksky.net/forecast/a849cd7ee1e185d27d4542113dd2d7ef/${localStorage.getItem('lat')},${localStorage.getItem('lng')}?units=si&lang=bs&exclude=[minutely,hourly,daily]`, fetchLocation);
+        const weatherInfo = await request(`https://api.darksky.net/forecast/a849cd7ee1e185d27d4542113dd2d7ef/${localStorage.getItem('lat')},${localStorage.getItem('lng')}?units=si&lang=bs&exclude=[minutely,hourly,daily]`, locationOptions);
         displayForecast(weatherInfo);
     } catch(err) {
         handleError(err);

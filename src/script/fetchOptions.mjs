@@ -1,4 +1,4 @@
-const login = () => {
+const loginOptions = () => {
     let data = {
         email: document.getElementById('email').value,
         password: document.getElementById('password').value
@@ -11,7 +11,7 @@ const login = () => {
     }
 }
 
-const user = () => {
+const userOptions = () => {
     return {
         method: 'GET',
         mode: 'cors',
@@ -21,8 +21,8 @@ const user = () => {
     }
 }
 
-const location = {
+const locationOptions = {
     method: 'GET',
     mode: 'cors'
 }
-export {login, user, location};
+export {loginOptions, userOptions, locationOptions};
