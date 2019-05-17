@@ -2,9 +2,10 @@ export const weather = () => {
     let html = ``;
     html = `
         <div class="row margin-none">
-            <div class="col-sm-12 col-md-8 col-xl-6 margin-auto margin-top padding-none" id="weather">
-                <input type="text" id="location" class="border-round">
+            <div class="col-sm-12 col-md-8 col-xl-6 margin-auto margin-top padding-none">
+                <input type="text" id="location" class="border-round" placeholder="Grad">
                 <button class="border-round show-weather" onclick="showWeather()">Show</button>
+                <div class="row margin-none" id="weather">
             </div>
         </div>
     `;
@@ -17,10 +18,16 @@ export const showWeather = async () => {
         localStorage.setItem('lat', location.results[0].geometry.lat);
         localStorage.setItem('lng', location.results[0].geometry.lng);
         const weatherInfo = await request(`https://api.darksky.net/forecast/a849cd7ee1e185d27d4542113dd2d7ef/${localStorage.getItem('lat')},${localStorage.getItem('lng')}?units=si&lang=bs&exclude=[minutely,hourly,daily]`, fetchLocation);
-        document.getElementById('weather').innerHTML += `
-            <div class="row margin-none">
+        displayForecast(weatherInfo);
+    } catch(err) {
+        handleError(err);
+    }
+}
+
+const displayForecast = (weatherInfo) => {
+    let html = `
                 <div class="col-sm-12 col-md-6">
-                    <img src="../images/weather/${weatherInfo.currently.icon}.png" width="100%" alt="${weatherInfo.currently.summary}">
+                    <img src="../images/weather/${weatherInfo.currently.icon}.png" width="100%" alt="${weatherInfo.currently.summary}" class="error">
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="row margin-none">
@@ -35,9 +42,7 @@ export const showWeather = async () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        `
-    } catch(err) {
-        console.log(err);
-    }
+            
+    `;
+    document.getElementById('weather').innerHTML = html;
 }

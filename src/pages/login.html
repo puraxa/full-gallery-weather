@@ -20,14 +20,15 @@
             <a href="#" onclick="logOut()" style="display:none;float:right;" id="logout">Log out</a>
         </nav>
         <div class="row">
-            <div class="col-sm-12 col-md-9 col-xl-6 margin-auto">
+            <div class="col-sm-12 col-md-9 col-xl-6 margin-auto" id="login-form">
                 <img src="../images/login.png" alt="login.png" width="100%">
                 <label for="">Email</label>
                 <input type="text" placeholder="Email" class="border-round" id="email">
                 <br>
                 <label for="" class="margin-top">Password</label>
                 <input type="password" placeholder="Password" class="border-round" id="password">
-                <button onclick="loginFn(request,loginUrl, fetchLogin(), userUrl, fetchUser)">Login</button>
+                <button onclick="loginFn(request,loginUrl, fetchLogin(), userUrl, fetchUser)" class="border-round margin-top">Login</button>
+                <p class="col-12 error" id="error"></p>
             </div>
         </div>
     </div>

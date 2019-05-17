@@ -7,6 +7,8 @@ import {welcomeMessage} from './welcomeMessage.mjs';
 import {displayProfile} from './profile.mjs';
 import {gallery} from './gallery.mjs';
 import {weather, showWeather} from './weather.mjs';
+import {logOut} from './logout.mjs';
+import {handleError} from './handleError.mjs';
 
 window.loginUrl = urls.loginUrl;
 window.galleryUrl = urls.galleryUrl;
@@ -22,3 +24,5 @@ window.gallery = gallery;
 window.weather = weather;
 window.fetchLocation = fetchOptions.location;
 window.showWeather = showWeather;
+window.logOut = logOut;
+window.handleError = handleError;

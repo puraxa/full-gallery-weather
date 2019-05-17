@@ -1,3 +1,5 @@
+import { handleError } from "./handleError.mjs";
+
 export let login = async (request, url, options, callbackUrl, callbackOptions) => {
     try{
         let response = await request(url, options);
@@ -9,6 +11,6 @@ export let login = async (request, url, options, callbackUrl, callbackOptions) =
         localStorage.setItem('user_email', user.email);
         location.href = '../index.html';
     } catch(err){
-        console.log(err);
+        handleError(err);
     }
 }
